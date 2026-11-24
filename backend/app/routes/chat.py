@@ -1,6 +1,7 @@
 """Chat endpoint for PDF-grounded gym answers."""
 
 import logging
+import re
 
 from fastapi import APIRouter, HTTPException
 
@@ -24,15 +25,36 @@ GROQ_UNAVAILABLE_REPLY = (
     "The assistant is temporarily unavailable. Please try again later or "
     "contact the gym through the contact page or by phone."
 )
+NO_RELEVANT_CONTEXT_REPLY = (
+    "I don't have that information in the gym guide. Please contact the gym "
+    "through the contact page or by phone."
+)
+GREETING_REPLY = "Hello! Welcome to The Lift Lab. How can I help you today?"
+_GREETING_PATTERN = re.compile(
+    r"^(?:(?:hi|hello|hey|hiya|howdy|yo)(?:\s+there)?|"
+    r"good\s+(?:morning|afternoon|evening))[!,.?\s]*$",
+    re.IGNORECASE,
+)
+
+
+def _is_greeting(message: str) -> bool:
+    """Return whether the message contains only a simple greeting."""
+    return bool(_GREETING_PATTERN.fullmatch(message.strip()))
 
 
 @router.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
     """Answer a question using the most relevant PDF passages."""
+    if _is_greeting(request.message):
+        return ChatResponse(reply=GREETING_REPLY, sources=[])
+
     if not has_indexed_chunks():
         return ChatResponse(reply=NO_DOCUMENTS_REPLY, sources=[])
 
     matches = retrieve(request.message, top_k=TOP_K)
+    if not matches:
+        return ChatResponse(reply=NO_RELEVANT_CONTEXT_REPLY, sources=[])
+
     context = [
         {
             "filename": match.chunk.filename,

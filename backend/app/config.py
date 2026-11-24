@@ -34,21 +34,26 @@ CHUNKS_PATH = INDEX_DIR / "chunks.json"
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
 GROQ_MODEL = (
-    os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile").strip()
-    or "llama-3.3-70b-versatile"
+    os.getenv("GROQ_MODEL", "openai/gpt-oss-20b").strip()
+    or "openai/gpt-oss-20b"
 )
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 
 CHUNK_SIZE = _positive_int("CHUNK_SIZE", 800)
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "150"))
 TOP_K = _positive_int("TOP_K", 4)
-MIN_SIMILARITY_SCORE = float(os.getenv("MIN_SIMILARITY_SCORE", "0.35"))
+SIMILARITY_THRESHOLD = float(
+    os.getenv(
+        "SIMILARITY_THRESHOLD",
+        os.getenv("MIN_SIMILARITY_SCORE", "0.58"),
+    )
+)
 MAX_UPLOAD_BYTES = _positive_int("MAX_UPLOAD_BYTES", 20 * 1024 * 1024)
 
 if CHUNK_OVERLAP < 0 or CHUNK_OVERLAP >= CHUNK_SIZE:
     raise ValueError("CHUNK_OVERLAP must be non-negative and smaller than CHUNK_SIZE.")
-if not -1.0 <= MIN_SIMILARITY_SCORE <= 1.0:
-    raise ValueError("MIN_SIMILARITY_SCORE must be between -1 and 1.")
+if not -1.0 <= SIMILARITY_THRESHOLD <= 1.0:
+    raise ValueError("SIMILARITY_THRESHOLD must be between -1 and 1.")
 
 _default_origins = "http://localhost:5173,http://127.0.0.1:5173"
 CORS_ORIGINS = [

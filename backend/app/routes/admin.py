@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.config import MAX_UPLOAD_BYTES, PDF_DIR
-from app.rag.loader import PDFLoadError
+from app.rag.loader import PDFLoadError, load_pdf_pages
 from app.rag.pipeline import ingest_pdfs
 from app.schemas import (
     DocumentInfo,
@@ -52,7 +52,19 @@ def list_documents() -> DocumentsResponse:
 def upload_pdf(file: UploadFile = File(...)) -> UploadResponse:
     """Store a PDF and rebuild the searchable index."""
     filename = (file.filename or "").replace("\\", "/").rsplit("/", maxsplit=1)[-1]
-    if not filename or filename in {".", ".."} or Path(filename).suffix.lower() != ".pdf":
+    reserved_names = {
+        "CON", "PRN", "AUX", "NUL",
+        *(f"COM{number}" for number in range(1, 10)),
+        *(f"LPT{number}" for number in range(1, 10)),
+    }
+    if (
+        not filename
+        or filename in {".", ".."}
+        or Path(filename).suffix.lower() != ".pdf"
+        or any(character in '<>:"|?*' or ord(character) < 32 for character in filename)
+        or filename.endswith((" ", "."))
+        or Path(filename).stem.upper() in reserved_names
+    ):
         raise HTTPException(status_code=400, detail="Please upload a PDF file.")
 
     content = file.file.read(MAX_UPLOAD_BYTES + 1)
@@ -73,6 +85,16 @@ def upload_pdf(file: UploadFile = File(...)) -> UploadResponse:
         raise HTTPException(
             status_code=409,
             detail="A PDF with that filename already exists.",
+        ) from error
+
+    try:
+        load_pdf_pages(destination)
+    except PDFLoadError as error:
+        destination.unlink(missing_ok=True)
+        logger.warning("Rejected unreadable uploaded PDF %s.", filename)
+        raise HTTPException(
+            status_code=422,
+            detail="The PDF could not be read. Check the document and try again.",
         ) from error
 
     try:
