@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { chatCopy } from '../data/site'
 
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
-export const USE_MOCK = true
+// const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const baseURL = import.meta.env.VITE_API_URL || ''
+export const USE_MOCK = false
 
 function getMockReply(message) {
   const text = message.toLowerCase()
