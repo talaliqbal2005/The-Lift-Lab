@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { Activity, CarFront, CupSoda, Dumbbell, Flame, LockKeyhole, Waves, UserRound, UsersRound } from 'lucide-react'
+import { Activity, CarFront, CupSoda, Dumbbell, Flame, LockKeyhole, Snowflake, UserRound, UsersRound, Waves, Wifi } from 'lucide-react'
 
-const icons = { Activity, CarFront, CupSoda, Dumbbell, Flame, LockKeyhole, Waves, UserRound, UsersRound }
+const icons = { Activity, CarFront, CupSoda, Dumbbell, Flame, LockKeyhole, Snowflake, UserRound, UsersRound, Waves, Wifi }
 
 export default function FacilityCard({ facility, index = 0 }) {
   const Icon = icons[facility.icon] || Activity

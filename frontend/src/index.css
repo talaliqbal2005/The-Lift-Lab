@@ -128,7 +128,7 @@ img { display: block; max-width: 100%; }
 .facility-card__icon { display: grid; width: 42px; height: 42px; flex-shrink: 0; place-items: center; color: var(--color-lift-yellow); background: rgb(250 204 21 / 8%); }
 .facility-card h3 { margin: 19px 0 8px; }
 .facility-card ul { display: flex; flex-wrap: wrap; gap: 7px; margin: auto 0 0; padding: 18px 0 0; list-style: none; }
-.facility-card li { color: #b3b3b3; font-size: 9px; }
+.facility-card li { color: #b3b3b3; font-size: 11px; line-height: 1.6; }
 .facility-card li + li::before { margin: 0 7px 0 0; color: var(--color-lift-yellow); content: "·"; }
 
 .equipment-feature { padding: 98px 0; background: var(--color-lift-surface); }
@@ -159,6 +159,7 @@ img { display: block; max-width: 100%; }
 .pricing-card__name { margin-top: 8px; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .pricing-card__price { display: flex; align-items: baseline; gap: 8px; margin: 17px 0 9px; }
 .pricing-card__price strong { font-family: var(--font-display); font-size: 62px; font-weight: 400; line-height: 1; }
+.pricing-card__price strong small { font-family: var(--font-body); font-size: 15px; font-weight: 700; vertical-align: middle; }
 .pricing-card__price span { color: #999; font-size: 10px; }
 .pricing-card--featured .pricing-card__price span, .pricing-card--featured > p, .pricing-card--featured .pricing-card__name { color: #26220e; }
 .pricing-card > p { min-height: 42px; margin: 0; color: #a1a1a1; font-size: 11px; line-height: 1.7; }
@@ -169,25 +170,15 @@ img { display: block; max-width: 100%; }
 .pricing-card--featured li { color: #171605; }
 .pricing-card--featured li svg { color: var(--color-lift-black); }
 .pricing-card__button { width: 100%; margin-top: auto; }
-.plans-note { margin: 26px 0 0; color: #858585; font-size: 10px; text-align: center; }
+.plans-note { display: grid; max-width: 860px; gap: 8px; margin: 26px auto 0; color: #969696; font-size: 12px; line-height: 1.7; text-align: center; }
+.plans-note p { margin: 0; }
 
-.section--testimonials { background: var(--color-lift-surface); }
-.testimonial-layout { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 90px; }
-.testimonial-layout .section-heading { margin-bottom: 0; }
-.testimonial-slider { min-height: 260px; padding: 28px 30px; border: 1px solid #2d2d2d; background: #111; }
-.testimonial-slider__controls { display: flex; align-items: center; justify-content: space-between; color: #858585; font-size: 10px; letter-spacing: .1em; }
-.testimonial-slider__controls i { margin-inline: 6px; color: var(--color-lift-yellow); font-style: normal; }
-.testimonial-slider__controls > div { display: flex; gap: 7px; }
-.testimonial-slider__controls button { display: grid; width: 35px; height: 35px; place-items: center; color: var(--color-lift-white); background: transparent; border: 1px solid #333; cursor: pointer; transition: color .2s ease, border-color .2s ease; }
-.testimonial-slider__controls button:hover { color: var(--color-lift-yellow); border-color: var(--color-lift-yellow); }
-.testimonial-quote { margin: 20px 0 0; }
-.testimonial-quote__icon { color: var(--color-lift-yellow); }
-.testimonial-quote > p { max-width: 580px; margin: 14px 0 20px; color: #e6e6e6; font-size: 16px; line-height: 1.8; }
-.testimonial-quote footer { display: flex; align-items: center; gap: 11px; }
-.testimonial-avatar { display: grid; width: 36px; height: 36px; place-items: center; color: var(--color-lift-black); background: var(--color-lift-yellow); font-size: 10px; font-weight: 800; }
-.testimonial-quote footer span:last-child { display: flex; flex-direction: column; gap: 4px; }
-.testimonial-quote footer strong { font-size: 10px; }
-.testimonial-quote footer small { color: #999; font-size: 9px; }
+.section--first-visit { background: var(--color-lift-surface); }
+.first-visit-layout { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 90px; }
+.first-visit-layout .section-heading { margin-bottom: 0; }
+.first-visit-card { padding: 28px 30px; background: #111; border: 1px solid #2d2d2d; border-left: 3px solid var(--color-lift-yellow); }
+.first-visit-card strong { color: var(--color-lift-yellow); font-size: 12px; letter-spacing: .12em; }
+.first-visit-card p { margin: 15px 0 22px; color: #b6b6b6; font-size: 14px; line-height: 1.8; }
 
 .final-cta { position: relative; overflow: hidden; padding: 76px 0; background: var(--color-lift-yellow); color: var(--color-lift-black); }
 .final-cta::after { position: absolute; top: -100px; right: 10%; width: 360px; height: 360px; border: 1px solid rgb(10 10 10 / 12%); border-radius: 50%; box-shadow: 0 0 0 45px rgb(10 10 10 / 4%), 0 0 0 90px rgb(10 10 10 / 3%); content: ""; pointer-events: none; }
@@ -247,6 +238,7 @@ img { display: block; max-width: 100%; }
 .contact-hours h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 15px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
 .contact-hours h3 svg { color: var(--color-lift-yellow); }
 .contact-hours p { display: flex; justify-content: space-between; gap: 12px; margin: 9px 0 0; color: #aaa; font-size: 9px; }
+.trainer-rates { margin: 28px 0 0; padding: 18px 20px; color: #c6c6c6; background: var(--color-lift-surface); border-left: 2px solid var(--color-lift-yellow); font-size: 13px; line-height: 1.7; }
 .not-found-action { display: flex; align-items: center; gap: 28px; }
 .not-found-action > span { color: var(--color-lift-yellow); font-family: var(--font-display); font-size: 130px; line-height: 1; }
 
@@ -298,7 +290,7 @@ img { display: block; max-width: 100%; }
   .benefit-grid { grid-template-columns: repeat(2, 1fr); }
   .facility-grid--preview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .equipment-feature__layout { grid-template-columns: 1fr; gap: 35px; }
-  .testimonial-layout { grid-template-columns: 1fr; gap: 30px; }
+  .first-visit-layout { grid-template-columns: 1fr; gap: 30px; }
   .footer-main { grid-template-columns: repeat(2, 1fr); }
   .contact-layout { gap: 38px; }
 }
@@ -348,9 +340,8 @@ img { display: block; max-width: 100%; }
   .pricing-card { min-height: auto; padding: 24px; }
   .pricing-card--featured { transform: none; }
   .pricing-card ul { margin-bottom: 21px; }
-  .testimonial-layout { gap: 10px; }
-  .testimonial-slider { padding: 20px; }
-  .testimonial-quote > p { font-size: 14px; }
+  .first-visit-layout { gap: 10px; }
+  .first-visit-card { padding: 23px 20px; }
   .final-cta { padding: 58px 0; }
   .final-cta__inner { align-items: flex-start; flex-direction: column; gap: 23px; }
   .final-cta h2 { font-size: 52px; }

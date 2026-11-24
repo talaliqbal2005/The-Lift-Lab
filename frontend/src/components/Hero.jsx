@@ -19,9 +19,9 @@ export default function Hero() {
       <motion.div className="hero-section__orb" aria-hidden="true" animate={{ y: [0, -18, 0], opacity: [0.35, 0.55, 0.35] }} transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }} />
       <div className="container hero-section__content">
         <motion.div initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="hero-kicker"><span /> YOUR WORKOUT. YOUR WAY.</span>
+          <span className="hero-kicker"><span /> DHA PHASE 6 · KARACHI</span>
           <h1>Forge your<br /><span>strongest self.</span></h1>
-          <p className="hero-copy">A better kind of gym. Expert coaching, thoughtful spaces, and a community that meets you where you are.</p>
+          <p className="hero-copy">A premium, performance-focused gym for men and women. Build strength, improve fitness, and feel confident with expert coaching and dedicated training zones.</p>
           <div className="hero-actions"><Link className="button button--primary" to="/contact">Start your journey <ArrowRight size={17} /></Link><Link className="hero-link" to="/facilities">Explore the space <MoveUpRight size={16} /></Link></div>
         </motion.div>
         <motion.div className="hero-stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.6 }}>
@@ -29,7 +29,7 @@ export default function Hero() {
         </motion.div>
       </div>
       <a className="hero-scroll" href="#about"><span>Scroll to discover</span><ArrowDown size={16} /></a>
-      <span className="hero-side-note">SEATTLE · EST. 2012</span>
+      <span className="hero-side-note">KARACHI · PAKISTAN</span>
     </section>
   )
 }

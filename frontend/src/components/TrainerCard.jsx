@@ -11,7 +11,7 @@ export default function TrainerCard({ trainer, index = 0 }) {
       whileHover={{ y: -7 }}
     >
       <div className="trainer-card__image">
-        <img src={trainer.image} alt={`${trainer.name}, ${trainer.role} coach`} loading="lazy" />
+        <img src={trainer.image} alt={`${trainer.name}, ${trainer.role}`} loading="lazy" />
       </div>
       <div className="trainer-card__body">
         <div className="trainer-card__meta"><span>{trainer.role}</span><span>{trainer.experience}</span></div>

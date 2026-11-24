@@ -6,9 +6,21 @@ export const USE_MOCK = true
 
 function getMockReply(message) {
   const text = message.toLowerCase()
-  if (text.includes('price') || text.includes('membership') || text.includes('plan')) return chatCopy.mockAnswers.membership
-  if (text.includes('hour') || text.includes('open') || text.includes('time')) return chatCopy.mockAnswers.hours
-  if (text.includes('sauna') || text.includes('steam')) return chatCopy.mockAnswers.sauna
+  if (text.includes('sauna') || text.includes('steam')) return text.includes('steam') && !text.includes('sauna') ? chatCopy.mockAnswers.steam : chatCopy.mockAnswers.sauna
+  if (['trainer', 'coach', 'personal training', 'weight loss', 'muscle building'].some((term) => text.includes(term))) return chatCopy.mockAnswers.trainers
+  if (['class', 'hiit', 'yoga', 'zumba', 'spinning', 'crossfit'].some((term) => text.includes(term)) || (text.includes('functional') && text.includes('schedule'))) return chatCopy.mockAnswers.classes
+  if (['locker', 'towel'].some((term) => text.includes(term))) return chatCopy.mockAnswers.lockers
+  if (['location', 'address', 'parking', 'phone', 'whatsapp', 'email', 'contact'].some((term) => text.includes(term))) return chatCopy.mockAnswers.contact
+  if (['facilit', 'wifi', 'air conditioning', 'juice bar', 'protein bar'].some((term) => text.includes(term))) return chatCopy.mockAnswers.amenities
+  if (['equipment', 'treadmill', 'dumbbell', 'machine', 'kettlebell', 'functional training'].some((term) => text.includes(term))) return chatCopy.mockAnswers.equipment
+  if (['trial', 'first visit', 'first-time', 'cnic', 'student card', 'assessment'].some((term) => text.includes(term))) return chatCopy.mockAnswers.firstVisit
+  if (['medical', 'health concern', 'pregnant', 'blood pressure', 'heart problem', 'feeling unwell'].some((term) => text.includes(term))) return chatCopy.mockAnswers.health
+  if (['freeze', 'cancel', 'payment', 'refund', 'minimum age', 'policy', 'policies'].some((term) => text.includes(term))) return chatCopy.mockAnswers.policies
+  if (['what should i bring', 'gym rules', 'dress code', 'sandals', 'vaping', 'smoking'].some((term) => text.includes(term))) return chatCopy.mockAnswers.rules
+  if (['price', 'how much', 'cost', 'discount', 'joining fee'].some((term) => text.includes(term))) return chatCopy.mockAnswers.membership
+  if (['include', 'features', 'basic', 'pro', 'elite'].some((term) => text.includes(term)) || text.includes('plan')) return chatCopy.mockAnswers.plans
+  if (['hour', 'open', 'time', 'women-only', 'women only', 'ramadan', 'holiday', 'quiet', 'busy', 'crowd'].some((term) => text.includes(term))) return chatCopy.mockAnswers.hours
+  if (text.includes('membership')) return chatCopy.mockAnswers.membership
   return chatCopy.mockAnswers.default
 }
 
